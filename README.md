@@ -22,7 +22,7 @@ What we aim to do is whatever we make, it should function as close as possible a
 
 ## Technical Feature:
 - Infinite Scroll
-- Modal System, Customized Cached System, State System, Event System (greatly thanks to Tuan Anh and his currently working place)
+- Modal System, Customized Cached System, State System, Event System 
 - Redux-free
 - Customized RESTful API "communicator" for front-end to connect to back-end
 - Facebook, Google Login
