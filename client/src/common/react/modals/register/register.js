@@ -25,7 +25,7 @@ const MODALTYPE = {
 
 export class RegisterModal extends KComponent {
   constructor(props) {
-    super(props);
+    super();
     this.state = {
       modalType: MODALTYPE.INITIAL,
       checking: false,
@@ -264,9 +264,15 @@ export class RegisterModal extends KComponent {
               onResponse={this.handleSocialResponse}
             />
           </div>
-          <i
+          <button
             className="fas fa-times close-modal register-close-button"
+            aria-label="Close"
             onClick={() => onClose()}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                onClose();
+              }
+            }}
           />
         </div>
         <div className="modal-footer register-modal-footer">

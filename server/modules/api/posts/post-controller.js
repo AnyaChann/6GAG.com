@@ -13,7 +13,7 @@ const {
 //@TODO: Add API for change comments's votes
 
 const createPost = async (req, res, next) => {
-  const { title, tags, url, nsfw, category, type, attributeLink } = req.body;
+  const { title, tags, url, nsfw, category, type } = req.body;
   let savedTags = JSON.parse(tags);
   savedTags = savedTags.map(each => {
     let lowercase = each.toLowerCase();

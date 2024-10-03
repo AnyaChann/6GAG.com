@@ -9,6 +9,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const multer = require("multer");
+const cors = require("cors")
 
 const authRoutes = require("./modules/api/auth/router");
 const userRoutes = require("./modules/api/users/router");
@@ -5309,7 +5310,7 @@ mongoose
         url: "http://9gag.com/gag/amB3bbo"
       }
     ];
-    arrayTags.map(each => {
+    arrayTags.forEach(each => {
       let catId = "5d249230a95b081421e5d301";
       Category.findOne({ name: each.postSection.name })
         .then(data => {

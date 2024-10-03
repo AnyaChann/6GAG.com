@@ -166,7 +166,7 @@ class Profile extends KComponent {
         </div>
 
         <div className="field avatar">
-          <label>Avatar</label>
+          <label htmlFor="avatar">Avatar</label>
           <div className="avatar-content">
             <div className="avatar-container">
               <div>
@@ -178,7 +178,7 @@ class Profile extends KComponent {
             </div>
 
             <div className="control">
-              <input type="file" name="avatar" accept=".jpg, .gif, .png" />
+              <input type="file" id="avatar" name="avatar" accept=".jpg, .gif, .png" />
               <p className="tips">JPG, GIF or PNG, Max size: 2MB</p>
               <Link to="#">Random</Link>
             </div>
@@ -186,11 +186,12 @@ class Profile extends KComponent {
         </div>
 
         <div className="field">
-          <label>Your Name</label>
+          <label htmlFor="name">Your Name</label>
           {this.form.enhancedComponent(
             "name",
             ({ error, onChange, onEnter, ...others }) => (
               <InputBase
+                id="name"
                 maxLength="20"
                 className=""
                 error={error}

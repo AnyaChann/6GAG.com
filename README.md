@@ -3,7 +3,7 @@
 ## Introduction
 An unoffical clone of 9Gag. Made with purpose of learning web development in general.
 
-What we aim to do is whatever we make, it should function as close as possible as 9Gag (of course just to some level since there are more factors other than skills and algorithm).
+What i aim to do is whatever i make, it should function as close as possible as 9Gag (of course just to some level since there are more factors other than skills and algorithm).
 
 ## Overview
 - One page app with:
@@ -39,25 +39,9 @@ What we aim to do is whatever we make, it should function as close as possible a
   - Customized Media Player: Automatically stop playing vids when out of boundaries.
   - Stylus Compiler: Self-made bash .sh file help to compile stylus real-time.
 
-## Preview:
-### Feed
-![Feed](MD/feed.gif)
-### Login
-![Login](MD/login.gif)
-### Single Post
-![Login](MD/singlepost.gif)
-### Upload Image
-![Login](MD/uploadpost.gif)
-### Upload Video
-![Login](MD/uploadvid.gif)
-### Lazy Converting Video/ Image
-![Login](MD/lazy.gif)
-### Account Page
-![Login](MD/accountpage.gif)
-
 ## Installation:
   - Prerequisite: Stylus, FFmpeg (such that it can run in cmd)
-  - Only test with 4 computers so there might not be work with you, email me at termanteus@gmail.com if need help of course.
+  - Only test with 1 computers so there might not be work with other devices, email me at bachcterpro@gmail.com if need help of course.
   
   Current directory: .../Nigg4g
   ```
@@ -98,6 +82,6 @@ What we aim to do is whatever we make, it should function as close as possible a
       - Hot/Trending algorithm: eventhough this is not made into the final version, I've already been reading a bunch about these and gathered some knowledge for myself.
       - Recursive Comment
     - HTML, CSS:
-      - Before this project, I have zero knowledge at all, then my friend suggested me learning Stylus and now I can somewhat write and style a webpage.
+      - I can somewhat write and style a webpage.
     - DevOps:
       - I sensed a slight slight VERY slight of what a devOps might be doing and it feels like devOps is a very OP people <3.
