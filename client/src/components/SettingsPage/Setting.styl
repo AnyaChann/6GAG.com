@@ -1,0 +1,226 @@
+form#setting-form {
+  overflow: hidden;
+  margin-left: 300px;
+}
+
+#setting-form h2 {
+  font-size: 36px;
+  line-height: normal;
+}
+
+.field {
+  margin: 20px 0;
+  margin-left: 3px;
+  position: relative;
+}
+
+.field label {
+  display: block;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+#setting-form input[type=email], #setting-form input[type=password], #setting-form input[type=text], #setting-form input[type=url] {
+  line-height: 20px;
+  box-sizing: content-box;
+  padding: 9px;
+  height: 20px;
+  display: block;
+  margin: 6px 0;
+  width: 440px;
+  border: 1px solid #ddd;
+  font: 14px -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue, Arial, Helvetica, Geneva, sans-serif;
+}
+
+#setting-form .field.width440px {
+  width: 440px !important;
+}
+
+#setting-form .input-with-icon .input-icon {
+  position: absolute;
+  right: -4px;
+  top: calc(50% - 8px);
+}
+
+#setting-form .field .server-error {
+  text-align: left;
+  color: #f00;
+}
+
+.field p.tips {
+  color: #999;
+  font-size: 12px;
+}
+
+#setting-form select {
+  box-sizing: border-box;
+  height: 40px;
+  padding: 5px 0;
+  font: 14px -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue, Arial, Helvetica, Geneva, sans-serif;
+  border: 1px solid #999;
+  font-weight: 700;
+}
+
+#setting-form select, textarea {
+  outline: 0;
+  line-height: 20px;
+  margin: 6px 0;
+  display: block;
+}
+
+.btn-setting-container {
+  padding: 10px 0;
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+#setting-form input[type=submit] {
+  color: #fff;
+  background-color: #09f;
+  padding: 8px 16px;
+  height: 20px;
+  border: none;
+  border-radius: 2px;
+  font: 14px / 20px -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue, Arial, Helvetica, Geneva, sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  -webkit-appearance: none;
+  box-sizing: content-box;
+}
+
+#setting-form input[type=submit]:hover {
+  background-color: #33adff;
+  color: #fff;
+}
+
+.field.avatar .avatar-content {
+  display: flex;
+}
+
+.field.avatar label {
+  margin-bottom: 6px;
+}
+
+.field.avatar .avatar-container {
+  // float: left;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.field.avatar .avatar-container img {
+  display: block;
+  width: 80px;
+  height: 80px;
+}
+
+.field.avatar .control {
+  // float: left;
+  margin: 20px 0 20px 20px;
+  height: 40px;
+}
+
+.field.avatar input[type=file] {
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+.field.avatar a {
+  font-size: 14px;
+}
+
+.date-picker {
+  width: 420px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+}
+
+.date-picker input.year {
+  width: 37% !important;
+}
+
+.date-picker input.month, .date-picker input.day {
+  width: 20% !important;
+  margin-left: 2%;
+}
+
+#setting-form .my-txt-area input {
+  width: 438px;
+  height: 80px;
+  outline: 0;
+  line-height: 20px;
+  margin: 6px 0;
+  display: block;
+}
+
+#setting-form .my-txt-area input {
+  border-radius: 2px;
+  padding: 9px;
+  resize: none;
+}
+
+.setting-social-connect {
+  width: 460px;
+}
+
+.setting-social-connect label {
+  margin-bottom: 6px;
+  display: block;
+  font-weight: 700;
+}
+
+.setting-social-connect .connection {
+  margin-bottom: 20px;
+  background-color: #f4f4f4;
+  border-radius: 2px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.setting-social-connect .connection .field {
+  margin: 0;
+  padding: 10px;
+  position: relative;
+}
+
+.setting-social-connect .connection p.label {
+  line-height: 20px;
+  padding: 10px;
+  color: #999;
+  font-weight: 700;
+}
+
+.setting-social-connect .connection .field {
+  display: flex;
+  justify-content: space-between;
+}
+
+.my-blue-button {
+  color: #fff;
+  background-color: #09f;
+  padding: 8px 16px;
+  height: 20px;
+  border: none;
+  border-radius: 2px;
+  font: 14px / 20px -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue, Arial, Helvetica, Geneva, sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  -webkit-appearance: none;
+  box-sizing: content-box;
+}
+
+.my-blue-button:hover:enabled {
+  background-color: #33adff;
+  color: #fff;
+}
+
+.my-blue-button:disabled {
+  background-color: #33adff;
+  color: #fff;
+  cursor: default;
+}

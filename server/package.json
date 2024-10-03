@@ -1,0 +1,53 @@
+{
+  "name": "6gag",
+  "version": "1.0.0",
+  "description": "Very awesome something",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./server/index.js",
+    "build-css": "node build-css.js",
+    "watch-css": "npm run build-css && stylus -c -w ./style/main.styl --out public/css/",
+    "start-js-window": "cross-env NODE_OPTIONS=--openssl-legacy-provider HTTPS=true react-scripts start",
+    "start-js": "cross-env NODE_OPTIONS=--openssl-legacy-provider HTTPS=true react-scripts start",
+    "start-w": "npm-run-all -p watch-css start-js-window",
+    "build-js": "react-scripts build",
+    "build": "npm-run-all build-css build-js",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github"
+  },
+  "homepage": "",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "express-validator": "^7.2.0",
+    "fluent-ffmpeg": "^2.1.3",
+    "jsonwebtoken": "^9.0.2",
+    "lodash": ">=4.17.21",
+    "mongoose": "^8.7.0",
+    "multer": "^1.4.4",
+    "nodemailer": "^6.9.15",
+    "nodemailer-express-handlebars": "^7.0.0",
+    "open-graph-scraper": "^6.8.2",
+    "probe-image-size": "^7.2.3",
+    "sharp": "^0.33.5",
+    "shortid": "^2.2.16",
+    "streamifier": "^0.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
