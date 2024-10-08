@@ -67,68 +67,92 @@ class Post extends KComponent {
   handleVote = async upVote => {
     const info = userInfo.getState();
     if (!info) {
-      registerModal.open(
-        () => this.props.history.push("/"),
-        () => {
-          this.handleVote(upVote);
-        }
-      );
+      this.promptRegisterModal(upVote);
     } else {
-      const { currentVote, upVoteCount, downVoteCount } = this.state;
-      if (currentVote === "UP") {
-        let upVoteC = upVoteCount - 1 < 0 ? 0 : upVoteCount - 1;
-        if (upVote) {
-          this.setState({ currentVote: "", upVoteCount: upVoteC });
-        } else {
-          let downVote = downVoteCount + 1;
-          this.setState({
-            currentVote: "DOWN",
-            upVoteCount: upVoteC,
-            downVoteCount: downVote
-          });
-        }
-      } else if (currentVote === "DOWN") {
-        let downVote = downVoteCount - 1 < 0 ? 0 : downVoteCount - 1;
-
-        if (upVote) {
-          let upVoteC = upVoteCount + 1;
-          this.setState({
-            currentVote: "UP",
-            downVoteCount: downVote,
-            upVoteCount: upVoteC
-          });
-        } else {
-          this.setState({ currentVote: "", downVoteCount: downVote });
-        }
-      } else {
-        if (upVote) {
-          let upVoteC = upVoteCount + 1;
-          this.setState({ currentVote: "UP", upVoteCount: upVoteC });
-        } else {
-          let downVote = downVoteCount + 1;
-          this.setState({ currentVote: "DOWN", downVoteCount: downVote });
-        }
-      }
-      let result = null;
-
-      clearTimeout(this.timeout);
-      this.timeout = setTimeout(async () => {
-        try {
-          if (upVote) {
-            result = await postApi.updateVotePost(this.props.post._id, 1);
-          } else {
-            result = await postApi.updateVotePost(this.props.post._id, 0);
-          }
-          let { upVoteCount, downVoteCount } = result.data;
-          this.setState({
-            upVoteCount: upVoteCount,
-            downVoteCount: downVoteCount
-          });
-        } catch (err) {
-          this.setState({ error: err });
-        }
-      }, 1000);
+      this.processVote(upVote);
     }
+  };
+
+  promptRegisterModal = upVote => {
+    registerModal.open(
+      () => this.props.history.push("/"),
+      () => {
+        this.handleVote(upVote);
+      }
+    );
+  };
+
+  processVote = upVote => {
+    const { currentVote, upVoteCount, downVoteCount } = this.state;
+    let newState = this.calculateNewVoteState(upVote, currentVote, upVoteCount, downVoteCount);
+    this.setState(newState);
+    this.updateVoteOnServer(upVote);
+  };
+
+  calculateNewVoteState = (upVote, currentVote, upVoteCount, downVoteCount) => {
+    let newState = {};
+    if (currentVote === "UP") {
+      newState = this.handleUpVote(upVote, upVoteCount, downVoteCount);
+    } else if (currentVote === "DOWN") {
+      newState = this.handleDownVote(upVote, upVoteCount, downVoteCount);
+    } else {
+      newState = this.handleNoVote(upVote, upVoteCount, downVoteCount);
+    }
+    return newState;
+  };
+
+  handleUpVote = (upVote, upVoteCount, downVoteCount) => {
+    let upVoteC = upVoteCount - 1 < 0 ? 0 : upVoteCount - 1;
+    if (upVote) {
+      return { currentVote: "", upVoteCount: upVoteC };
+    } else {
+      let downVote = downVoteCount + 1;
+      return {
+        currentVote: "DOWN",
+        upVoteCount: upVoteC,
+        downVoteCount: downVote
+      };
+    }
+  };
+
+  handleDownVote = (upVote, upVoteCount, downVoteCount) => {
+    let downVote = downVoteCount - 1 < 0 ? 0 : downVoteCount - 1;
+    if (upVote) {
+      let upVoteC = upVoteCount + 1;
+      return {
+        currentVote: "UP",
+        downVoteCount: downVote,
+        upVoteCount: upVoteC
+      };
+    } else {
+      return { currentVote: "", downVoteCount: downVote };
+    }
+  };
+
+  handleNoVote = (upVote, upVoteCount, downVoteCount) => {
+    if (upVote) {
+      let upVoteC = upVoteCount + 1;
+      return { currentVote: "UP", upVoteCount: upVoteC };
+    } else {
+      let downVote = downVoteCount + 1;
+      return { currentVote: "DOWN", downVoteCount: downVote };
+    }
+  };
+
+  updateVoteOnServer = upVote => {
+    clearTimeout(this.timeout);
+    this.timeout = setTimeout(async () => {
+      try {
+        let result = await postApi.updateVotePost(this.props.post._id, upVote ? 1 : 0);
+        let { upVoteCount, downVoteCount } = result.data;
+        this.setState({
+          upVoteCount: upVoteCount,
+          downVoteCount: downVoteCount
+        });
+      } catch (err) {
+        this.setState({ error: err });
+      }
+    }, 1000);
   };
 
   componentWillMount() {
@@ -167,8 +191,6 @@ class Post extends KComponent {
       }
     }
   }
-
-  componentDidMount() {}
 
   render() {
     const { post, firstPost } = this.props;
@@ -212,12 +234,20 @@ class Post extends KComponent {
               {" · " + time}
             </p>
           </div>
-          <h1
+          <button
             className="linked-title"
-            onClick={() => this.props.history.push(`/gag/${post._id}`)}
+            onClick={(e) => {
+              e.preventDefault();
+              this.props.history.push(`/gag/${post._id}`);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                this.props.history.push(`/gag/${post._id}`);
+              }
+            }}
           >
             {post.title}
-          </h1>
+          </button>
         </header>
         <div className="post-containter">{media}</div>
         <p className="post-meta">

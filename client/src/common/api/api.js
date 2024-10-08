@@ -7,18 +7,29 @@ class API {
       baseURL: url
     });
     this.headers = {};
+    this.instance.interceptors.request.use(request => {
+      Object.keys(this.headers).forEach(key => {
+        let val =
+          typeof this.headers[key] === "function"
+            ? this.headers[key]()
+            : this.headers[key];
+        if (val) {
+          request.headers[key] = val;
+        }
+      });
+      return request;
+    });
     this.instance.interceptors.response.use(
       response => {
-        console.log(response);
+        // console.log(response);
+        // console.log(response.message);
         return response;
       },
       error => {
         let resError = null;
         console.log(error);
-        if (error.message === 'Network Error') {
-          console.log('Network error occurred');
-          resError = new Error('network_error');
-        } else if (error.response) {
+        console.log(error.message);
+        if (error.response) {
           if (onErrors.hasOwnProperty(error.response.data.message))
             onErrors[error.response.data.message]();
           resError = new Error(error.response.data.message);

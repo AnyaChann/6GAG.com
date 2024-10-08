@@ -8,8 +8,13 @@ module.exports = (req, res, next) => {
     throw error;
   }
   const token = authHeader.split(" ")[1];
+  if (!token) {
+    const error = new Error("require_login");
+    error.statusCode = 401;
+    throw error;
+  }
   let decodedToken;
-  if (token != "infinityToken") {
+  if (token !== "infinityToken") {
     try {
       decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     } catch (error) {
@@ -21,11 +26,8 @@ module.exports = (req, res, next) => {
       error.statusCode = 401;
       throw error;
     }
-    var current_time = Date.now() / 1000;
-    if (
-      typeof decodedToken.exp !== "undefined" &&
-      decodedToken.exp < current_time
-    ) {
+    const current_time = Date.now() / 1000;
+    if (typeof decodedToken.exp !== "undefined" && decodedToken.exp < current_time) {
       const error = new Error("token_expired");
       error.statusCode = 401;
       throw error;

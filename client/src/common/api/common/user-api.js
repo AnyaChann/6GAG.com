@@ -17,7 +17,7 @@ export const userApi = {
     return axiosApi.post("/users/check-email", data);
   },
   checkUsername(data) {
-    return axiosApi.post("users/check-username", data);
+    return axiosApi.post("/users/check-username", data);
   },
   postForgotPassword(data) {
     return axiosApi.post("/users/forgot-password", data);
@@ -32,9 +32,9 @@ export const userApi = {
     return axiosApi.put("/users/change-password", data);
   },
   updateAccount(data) {
-    return axiosApi.put("users/update-account", data);
+    return axiosApi.put("/users/update-account", data);
   },
   updateProfile(data) {
-    return axiosApi.put("users/update-profile", data);
+    return axiosApi.put("/users/update-profile", data);
   }
 };

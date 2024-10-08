@@ -32,6 +32,10 @@ app.use(bodyParser.json());
 // Static folder Middleware
 app.use("/images", express.static(path.join(__dirname, "/uploads/images")));
 app.use("/assets", express.static(path.join(__dirname, "/uploads/assets")));
+app.use(
+  "/comment-images",
+  express.static(path.join(__dirname, "/uploads/comments-images"))
+);
 
 // CORS-Middleware
 app.use((req, res, next) => {
@@ -41,6 +45,7 @@ app.use((req, res, next) => {
     "OPTIONS, GET, POST, PUT, PATCH, DELETE"
   );
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
   next();
 });
 

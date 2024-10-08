@@ -51,4 +51,4 @@ class CommentSection extends Component {
   }
 }
 
-export default CommentSection;
+export default {CommentSection};

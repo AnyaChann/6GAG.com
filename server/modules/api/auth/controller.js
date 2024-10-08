@@ -1,10 +1,7 @@
 const User = require("../users/model");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const omit = require("lodash/omit");
-const crypto = require("crypto");
-
 const { validationResult } = require("express-validator");
+const { generateToken, hashPassword, comparePassword } = require("./auth");
 
 exports.getAuthenUser = (req, res, next) => {
   const userId = req.userId;
@@ -26,71 +23,45 @@ exports.getAuthenUser = (req, res, next) => {
 exports.loginSocialUser = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    const error = new Error("user_validation_faied");
+    const error = new Error("user_validation_failed");
     error.statusCode = 422;
     error.data = errors.array();
     throw error;
   }
-  const email = req.body.email;
-  const name = req.body.name;
+  const { email, name, avatarURL, birthday, social } = req.body;
   const password = process.env.DEFAULT_PASSWORD;
-  const avatarURL = req.body.avatarURL;
-  const birthday = req.body.birthday;
-  const social = req.body.social;
-  return User.findOne({ email: email })
+
+  return User.findOne({ email })
     .then(user => {
       if (!user) {
-        let username = null;
-        let atIndex = email.indexOf("@");
-        username = email.substring(0, atIndex);
-
-        const user = new User({
-          username: username,
-          name: name,
-          password: password,
-          email: email,
-          avatarURL: avatarURL,
-          birthday: birthday,
+        const username = email.split("@")[0];
+        const newUser = new User({
+          username,
+          name,
+          password,
+          email,
+          avatarURL,
+          birthday,
           social: [social],
           verified: true
         });
-        return user.save(user);
+        return newUser.save();
       } else {
-        let socialUser = user.social;
-        let isLinked = false;
-        user.social.map(each => {
-          if (each.type === social.type) {
-            isLinked = true;
-          }
-        });
+        const isLinked = user.social.some(each => each.type === social.type);
         if (isLinked) {
           return Promise.resolve(user);
         } else {
-          socialUser.push(social);
+          user.social.push(social);
           return user.save();
         }
       }
     })
     .then(result => {
-      result = result.toObject();
-      const token = jwt.sign(
-        {
-          email: result.email,
-          userId: result._id.toString()
-        },
-        process.env.JWT_SECRET,
-        { expiresIn: "24h" }
-      );
-      let resUser = omit(result, [
-        "password",
-        "createdAt",
-        "updatedAt",
-        "active"
-      ]);
-
+      const token = generateToken(result);
+      const resUser = omit(result.toObject(), ["password", "createdAt", "updatedAt", "active"]);
       res.status(200).json({
         message: "login_social_succeed",
-        token: token,
+        token,
         user: resUser
       });
     })
@@ -105,10 +76,10 @@ exports.loginSocialUser = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
-  const email = req.body.email;
-  const password = req.body.password;
+  const { email, password } = req.body;
   let loadedUser;
-  return User.findOne({ email: email, active: 1 })
+
+  return User.findOne({ email, active: 1 })
     .lean()
     .then(user => {
       if (!user) {
@@ -117,7 +88,7 @@ exports.login = (req, res, next) => {
         throw error;
       }
       loadedUser = user;
-      return bcrypt.compare(password, user.password);
+      return comparePassword(password, user.password);
     })
     .then(isEqual => {
       if (!isEqual) {
@@ -125,24 +96,11 @@ exports.login = (req, res, next) => {
         error.statusCode = 401;
         throw error;
       }
-      const token = jwt.sign(
-        {
-          email: loadedUser.email,
-          userId: loadedUser._id.toString()
-        },
-        process.env.JWT_SECRET,
-        { expiresIn: "12h" }
-      );
-      let resUser = omit(loadedUser, [
-        "password",
-        "createdAt",
-        "updatedAt",
-        "active"
-      ]);
-      console.log(resUser);
+      const token = generateToken(loadedUser);
+      const resUser = omit(loadedUser, ["password", "createdAt", "updatedAt", "active"]);
       res.status(200).json({
         message: "login_succeed",
-        token: token,
+        token,
         user: resUser
       });
     })

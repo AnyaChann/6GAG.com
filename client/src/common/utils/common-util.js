@@ -15,10 +15,10 @@ const getBase64 = file =>
     };
   });
 
-let buildParams = obj => {
-  let params = Object.keys(obj);
-  let val = Object.values(obj);
-  let result = val.reduce((total, cur, i) => {
+const buildParams = obj => {
+  const params = Object.keys(obj);
+  const val = Object.values(obj);
+  const result = val.reduce((total, cur, i) => {
     if (cur !== undefined && cur !== null) {
       return total + `${params[i]}=${cur}&`;
     }
@@ -50,7 +50,7 @@ const getMetaTags = url => {
 };
 
 const getMonthName = (month, length) => {
-  let months = [
+  const months = [
     "January",
     "February",
     "March",
@@ -64,15 +64,25 @@ const getMonthName = (month, length) => {
     "November",
     "December"
   ];
+  
+  if (month < 0 || month > 11) {
+    throw new Error(`Invalid month value: ${month}. Month should be between 0 and 11.`);
+  }
+
   return months[month].substring(0, length);
 };
 
 const timeDifference = date => {
-  let millisec = Math.abs(date - Date.now());
-  let sec = Math.floor(millisec / 1000);
-  let mins = Math.floor(millisec / 60000);
-  let hrs = Math.floor(mins / 60);
-  let days = Math.floor(hrs / 24);
+  if (!(date instanceof Date)) {
+    throw new Error(`Invalid date value: ${date}. Expected a Date object.`);
+  }
+
+  const millisec = Math.abs(date - Date.now());
+  const sec = Math.floor(millisec / 1000);
+  const mins = Math.floor(millisec / 60000);
+  const hrs = Math.floor(mins / 60);
+  const days = Math.floor(hrs / 24);
+
   if (days <= 0) {
     if (hrs <= 0) {
       if (mins <= 0) {

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import classnames from "classnames";
 import InfiniteScroll from "react-infinite-scroller";
 
@@ -20,11 +21,25 @@ class Feed extends Component {
     };
   }
 
+  // componentDidMount() {
+  //   this.setState({ loading: true });
+  //   postApi
+  //     .getPosts()
+  //     .then(data => {
+  //       this.setState({ posts: Array.isArray(data) ? data : [], loading: false, error: null });
+  //       console.log(data);
+  //     })
+  //     .catch(err => {
+  //       this.setState({ loading: false, error: err, posts: [] });
+  //       console.log(err);
+  //     });
+  // }
+
   loadItems(page) {
     if (this.state.nextLink !== null) {
       postApi.getPosts(page).then(data => {
-        if (Array.isArray(data.post)) {
-          let newPosts = [...this.state.posts, ...data.post];
+        let newPosts = [...this.state.posts, ...(Array.isArray(data.post) ? data.post : [])];
+        if (data.nextLink !== null) {
           this.setState({
             posts: newPosts,
             loading: false,
@@ -32,40 +47,18 @@ class Feed extends Component {
             nextLink: data.nextLink,
             hasMoreItems: data.hasMoreItems
           });
-        } else {
-          this.setState({
-            loading: false,
-            error: "API response is not as expected",
-          });
-          console.error("API response is not as expected:", data);
         }
       }).catch(err => {
-        this.setState({
-          loading: false,
-          error: err.message,
-        });
-        console.error(err);
+        this.setState({ loading: false, error: err });
+        console.log(err);
       });
     }
   }
 
-  // componentDidMount() {
-  //   this.setState({ loading: true });
-  //   postApi
-  //     .getPosts()
-  //     .then(data => {
-  //       this.setState({ posts: data, loading: false, error: null });
-  //       console.log(data);
-  //     })
-  //     .catch(err => {
-  //       this.setState({ loading: false, error: null });
-  //       console.log(err);
-  //     });
-  // }
-
   render() {
     const { className, hasProfile } = this.props;
     const { posts } = this.state;
+    console.log("Rendering posts:", posts); 
     let items = [];
     items = posts.map((each, i) => {
       return (
@@ -105,5 +98,11 @@ class Feed extends Component {
     );
   }
 }
+
+Feed.propTypes = {
+  className: PropTypes.string,
+  hasProfile: PropTypes.bool,
+  history: PropTypes.object.isRequired
+};
 
 export default Feed;

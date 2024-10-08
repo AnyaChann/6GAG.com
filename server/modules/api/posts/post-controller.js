@@ -84,7 +84,7 @@ const createPost = async (req, res, next) => {
       }
     });
     res.status(200).json({
-      message: "Hail Hydra",
+      message: "Noice",
       data: {
         _id: result._id,
         redirect: `/gag/${result._id}`
@@ -154,6 +154,7 @@ const getPosts = (req, res, next) => {
     .populate("categoryId")
     .exec()
     .then(data => {
+      console.log("Fetched posts:", data); // Add this line to log the fetched posts
       let nextPage = page ? +page + 1 : 2;
       let hasMoreItems = true;
       if (data.length < 20) {

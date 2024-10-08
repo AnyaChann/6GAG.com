@@ -19,6 +19,8 @@ const statusRoutes = require("./modules/api/status/router");
 const utilRoutes = require("./modules/api/util/router");
 
 const Category = require("./modules/api/category/model");
+const Post = require("./modules/api/posts/model");
+const User = require("./modules/api/users/model");
 
 const {
   fileFilter,
@@ -45,6 +47,7 @@ app.use((req, res, next) => {
     "OPTIONS, GET, POST, PUT, PATCH, DELETE"
   );
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
   next();
 });
 
