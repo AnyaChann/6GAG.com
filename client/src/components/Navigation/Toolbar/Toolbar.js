@@ -8,7 +8,7 @@ const toolbar = props => {
     <header className="top-nav">
       <div className="nav-wrap">
         <Link className="my-logo" to="/">
-          9GAG
+          6GAG
         </Link>
         <nav className="nav-menu">{<NavItems />}</nav>
         <FunctionWrap

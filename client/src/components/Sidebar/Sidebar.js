@@ -3,7 +3,6 @@ import PopularSidebar from "./PopularSidebar/PopularSidebar";
 import CategorySection from "./CategorySection/CategorySection";
 import { Link } from "react-router-dom";
 
-
 const Sidebar = props => {
   return (
     <div className="section-sidebar">

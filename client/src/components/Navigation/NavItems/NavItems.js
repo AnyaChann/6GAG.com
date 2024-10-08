@@ -3,22 +3,11 @@ import NavItem from "../NavItems/NavItem/NavItem.js";
 
 const navigationItems = () => (
   <ul className="secondary">
-    <NavItem link="/">Free App</NavItem>
-    <NavItem link="/">
-      6GAG Tee{" "}
-      <span role="img" aria-label="T-Shirt">
-        👕
-      </span>
-    </NavItem>
-    <NavItem link="/">Rate My Outfit</NavItem>
-    <NavItem link="/">Crappy Design</NavItem>
-    <NavItem link="/">
-      Near You{" "}
-      <span role="img" aria-label="Near you">
-        📍
-      </span>
-    </NavItem>
-    <NavItem link="/">K-Pop</NavItem>
+    <NavItem link="/"><span role="img" aria-label="shuffle">🔀</span> Shuffle</NavItem>
+    <NavItem link="/"><span role="img" aria-label="get app">📱</span> Get App </NavItem>
+    <NavItem link="/"><span role="img" aria-label="memeland">🏴‍☠️</span> Memeland</NavItem>
+    <NavItem link="/"><span role="img" aria-label="vibes">💫</span> 9GAG Vibes</NavItem>
+    <NavItem link="/"><span role="img" aria-label="ask">❓</span> Ask</NavItem>
   </ul>
 );
 

@@ -204,158 +204,158 @@ class FullPost extends KComponent {
     }
     return (
       <article className={classnames("full-post")}>
-        <header className="post-header">
-          <div className="post-section">
-            <img
-              className="post-section__category-icon"
-              src={post.categoryId?.imageUrl}
-              alt="category-icon"
-            />
-            <p className="post-section__message">
-              <span>{post.categoryId?.name}</span>
-              {" · " + time}
-            </p>
-          </div>
-          <h1>{post.title}</h1>
-          <p className="post-meta">
-            <Link to="/" className="post-meta__text">
-              {upVoteCount - downVoteCount + " points"}
-            </Link>
-            {" · "}
-            <Link to="/" className="post-meta__text">
-              {post.comments.length + " comments"}
-            </Link>
-          </p>
-        </header>
-        <div className="full-post-after-bar">
-          <ul className="btn-vote left">
-            <li>
-              <div
-                className={classnames("btn-border up", {
-                  selected: this.state.currentVote === "UP"
-                })}
-                onClick={() => this.handleVote(true)}
-              />
-            </li>
-            <li>
-              <div
-                className={classnames("btn-border down", {
-                  selected: this.state.currentVote === "DOWN"
-                })}
-                onClick={() => this.handleVote(false)}
-              />
-            </li>
-          </ul>
-          <div>
-            <ul className="btn-vote left">
-              <li>
-                <FacebookShareButton url={"https://github.com"}>
-                  <FacebookSharingButton text={"Facebook"} />
-                </FacebookShareButton>
-              </li>
-              <li>
-                <PinterestShareButton
-                  url={"https://github.com"}
-                  media={post.images.image700.url}
-                >
-                  <PinterestSharingButton text={"Pinterest"} />
-                </PinterestShareButton>
-              </li>
-              <li>
-                <div className="btn-border more" />
-              </li>
-            </ul>
-            <div className="popup-viewshare hide">
-              <ul>
-                <li>Twitter</li>
-                <li>Email</li>
-                <li>Report</li>
-                <li>I just don't like it</li>
-              </ul>
-            </div>
-          </div>
-          <div className="btn-next right">
-            <span className="btn-next-body">Next Post</span>
-            <span className="btn-next-arrow" />
-          </div>
-          <div className="clearfix" />
+      <header className="post-header">
+        <div className="post-section">
+        <img
+          className="post-section__category-icon"
+          src={post.categoryId?.imageUrl}
+          alt="category-icon"
+        />
+        <p className="post-section__message">
+          <span>{post.categoryId?.name}</span>
+          {" · " + time}
+        </p>
         </div>
-        <div className="full-post-container">{media}</div>
-        <div style={{ display: "flex", marginTop: "16px" }}>
-          <FacebookShareButton
-            url={"https://github.com"}
-            style={{ flexGrow: "2", display: "flex" }}
-          >
-            <FacebookSharingButton
-              text={"Share on Facebook"}
-              height={44}
-              fontSize={15}
-              marginRight={8}
-            />
-          </FacebookShareButton>{" "}
+        <h1>{post.title}</h1>
+        <p className="post-meta">
+        <Link to="/" className="post-meta__text">
+          {upVoteCount - downVoteCount + " points"}
+        </Link>
+        {" · "}
+        <Link to="/" className="post-meta__text">
+          {post.comments.length + " comments"}
+        </Link>
+        </p>
+      </header>
+      <div className="full-post-after-bar">
+        <ul className="btn-vote left">
+        <li>
+          <div
+          className={classnames("btn-border up", {
+            selected: this.state.currentVote === "UP"
+          })}
+          onClick={() => this.handleVote(true)}
+          />
+        </li>
+        <li>
+          <div
+          className={classnames("btn-border down", {
+            selected: this.state.currentVote === "DOWN"
+          })}
+          onClick={() => this.handleVote(false)}
+          />
+        </li>
+        </ul>
+        <div>
+        <ul className="btn-vote left">
+          <li>
+          <FacebookShareButton url={"https://github.com"}>
+            <FacebookSharingButton text={"Facebook"} />
+          </FacebookShareButton>
+          </li>
+          <li>
           <PinterestShareButton
             url={"https://github.com"}
             media={post.images.image700.url}
-            style={{ flexGrow: "2", display: "flex" }}
           >
-            <PinterestSharingButton
-              text={"Share on Pinterest"}
-              height={44}
-              fontSize={15}
-            />
+            <PinterestSharingButton text={"Pinterest"} />
           </PinterestShareButton>
+          </li>
+          <li>
+          <div className="btn-border more" />
+          </li>
+        </ul>
+        <div className="popup-viewshare hide">
+          <ul>
+          <li>Twitter</li>
+          <li>Email</li>
+          <li>Report</li>
+          <li>I just don't like it</li>
+          </ul>
         </div>
-        <div style={{ marginTop: "8px" }}>
-          <p
-            className="full-post-report-text"
-            onClick={() => {
-              const info = userInfo.getState();
-              if (!info) {
-                registerModal.open();
-              } else {
-                reportModal.open();
-              }
-            }}
-          >
-            REPORT
-          </p>
         </div>
+        <div className="btn-next right">
+        <span className="btn-next-body">Next Post</span>
+        <span className="btn-next-arrow" />
+        </div>
+        <div className="clearfix" />
+      </div>
+      <div className="full-post-container">{media}</div>
+      <div style={{ display: "flex", marginTop: "16px" }}>
+        <FacebookShareButton
+        url={"https://github.com"}
+        style={{ flexGrow: "2", display: "flex" }}
+        >
+        <FacebookSharingButton
+          text={"Share on Facebook"}
+          height={44}
+          fontSize={15}
+          marginRight={8}
+        />
+        </FacebookShareButton>{" "}
+        <PinterestShareButton
+        url={"https://github.com"}
+        media={post.images.image700.url}
+        style={{ flexGrow: "2", display: "flex" }}
+        >
+        <PinterestSharingButton
+          text={"Share on Pinterest"}
+          height={44}
+          fontSize={15}
+        />
+        </PinterestShareButton>
+      </div>
+      <div style={{ marginTop: "8px" }}>
+        <p
+        className="full-post-report-text"
+        onClick={() => {
+          const info = userInfo.getState();
+          if (!info) {
+          registerModal.open();
+          } else {
+          reportModal.open();
+          }
+        }}
+        >
+        REPORT
+        </p>
+      </div>
 
-        <div className="full-post-comments">
-          <div className="full-post-comments__top-bar">
-            <div className="full-post-comments__cmts">{`${
-              post.comments.length
-            } Comments`}</div>
-            <div className="full-post-comments__filter">
-              <ul>
-                <li
-                  className={classnames({
-                    active: true
-                  })}
-                >
-                  Hot
-                </li>
-                <li
-                  className={classnames({
-                    active: false
-                  })}
-                >
-                  Fresh
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="full-post-comments__content">
-            {post.createdBy ? (
-              <CommentSection
-                postId={post._id}
-                createdBy={post.createdBy.username}
-              />
-            ) : (
-              <p>No comments available</p>
-            )}
-          </div>
+      <div className="full-post-comments">
+        <div className="full-post-comments__top-bar">
+        <div className="full-post-comments__cmts">{`${
+          post.comments.length
+        } Comments`}</div>
+        <div className="full-post-comments__filter">
+          <ul>
+          <li
+            className={classnames({
+            active: true
+            })}
+          >
+            Hot
+          </li>
+          <li
+            className={classnames({
+            active: false
+            })}
+          >
+            Fresh
+          </li>
+          </ul>
         </div>
+        </div>
+        <div className="full-post-comments__content">
+        {post.createdBy ? (
+          <CommentSection
+          postId={post._id}
+          createdBy={post.createdBy.username}
+          />
+        ) : (
+          <p>No comments available</p>
+        )}
+        </div>
+      </div>
       </article>
     );
   }

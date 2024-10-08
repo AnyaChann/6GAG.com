@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import HeaderSearchDropdown from "../HeaderSearchDropdown/HeaderSearchDropdown";
 
+
 class GeneralFunction extends Component {
   constructor(props) {
     super(props);

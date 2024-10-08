@@ -15,7 +15,7 @@ export default class VerifyAccount extends Component {
     const search = new URLSearchParams(this.props.location.search);
     const token = search.get("token");
     userApi.getVerifyUser(token).then(data => {
-      authenCache.setAuthen(data.data.token, { expire: 1 });
+      authenCache.setAuthen(data.data.token, { expire: 2 });
       userInfo
         .setState(data.data.user)
         .then(() => {
