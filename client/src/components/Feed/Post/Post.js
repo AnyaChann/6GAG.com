@@ -226,11 +226,11 @@ class Post extends KComponent {
           <div className="post-section">
             <img
               className="post-section__category-icon"
-              src={post.categoryId.imageUrl}
+              src={post.categoryId?.imageUrl}
               alt="category-icon"
             />
             <p className="post-section__message">
-              <span>{post.categoryId.name}</span>
+              <span>{post.categoryId?.name}</span>
               {" · " + time}
             </p>
           </div>

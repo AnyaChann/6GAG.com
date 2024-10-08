@@ -21,19 +21,19 @@ class Feed extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   this.setState({ loading: true });
-  //   postApi
-  //     .getPosts()
-  //     .then(data => {
-  //       this.setState({ posts: Array.isArray(data) ? data : [], loading: false, error: null });
-  //       console.log(data);
-  //     })
-  //     .catch(err => {
-  //       this.setState({ loading: false, error: err, posts: [] });
-  //       console.log(err);
-  //     });
-  // }
+  componentDidMount() {
+    this.setState({ loading: true });
+    postApi
+      .getPosts()
+      .then(data => {
+        this.setState({ posts: Array.isArray(data.post) ? data.post : [], loading: false, error: null });
+        console.log(data);
+      })
+      .catch(err => {
+        this.setState({ loading: false, error: err, posts: [] });
+        console.log(err);
+      });
+  }
 
   loadItems(page) {
     if (this.state.nextLink !== null) {

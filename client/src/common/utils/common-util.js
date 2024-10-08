@@ -69,7 +69,8 @@ const getMonthName = (month, length) => {
     throw new Error(`Invalid month value: ${month}. Month should be between 0 and 11.`);
   }
 
-  return months[month].substring(0, length);
+  console.log(months[month]);
+  return  months[month] ? months[month].substring(0, length) : null;
 };
 
 const timeDifference = date => {

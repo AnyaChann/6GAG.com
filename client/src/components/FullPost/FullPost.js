@@ -208,11 +208,11 @@ class FullPost extends KComponent {
           <div className="post-section">
             <img
               className="post-section__category-icon"
-              src={post.categoryId.imageUrl}
+              src={post.categoryId?.imageUrl}
               alt="category-icon"
             />
             <p className="post-section__message">
-              <span>{post.categoryId.name}</span>
+              <span>{post.categoryId?.name}</span>
               {" · " + time}
             </p>
           </div>
@@ -346,10 +346,14 @@ class FullPost extends KComponent {
             </div>
           </div>
           <div className="full-post-comments__content">
-            <CommentSection
-              postId={post._id}
-              createdBy={post.createdBy.username}
-            />
+            {post.createdBy ? (
+              <CommentSection
+                postId={post._id}
+                createdBy={post.createdBy.username}
+              />
+            ) : (
+              <p>No comments available</p>
+            )}
           </div>
         </div>
       </article>
