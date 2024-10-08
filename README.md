@@ -43,14 +43,13 @@ What i aim to do is whatever i make, it should function as close as possible as 
   - Prerequisite: Stylus, FFmpeg (such that it can run in cmd)
   - Only test with 1 computers so there might not be work with other devices, email me at bachcterpro@gmail.com if need help of course.
   
-  Current directory: .../Nigg4g
+  Current directory: .../6GAG.com
   ```
     npm install
     cd server && npm install 
     cd ../client && npm install
     cd ..
-    Linux: npm start
-    Window: npm run start-w 
+    Linux / Window: npm start
   ```
 
 ## Feature that is not to be made (sadly):
